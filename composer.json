@@ -1,0 +1,20 @@
+{
+    "name": "yangchao/php-jwt",
+    "description": "php-jwt",
+    "type": "library",
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Yangchao\\PhpJwt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yangchao",
+            "email": "yc_1224@163.com"
+        }
+    ]
+}
