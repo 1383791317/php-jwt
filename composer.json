@@ -8,7 +8,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Yangchao\\PhpJwt\\": "src/"
+            "yangchao\\jwt\\": "src/"
         }
     },
     "authors": [
