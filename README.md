@@ -24,8 +24,8 @@ $config = [
     'refresh_public_key' => '',//RS256 刷新RSA公钥
     'refresh_private_key' => '',//RS256 刷新RSA私钥
     'black_list'=>[ //黑名单配置
-        'redis_host' => '120.78.131.19',//黑名单储存 redis主机
-        'redis_password' => 'CZdLYnWfbqKxv7Tp',// redis密码
+        'redis_host' => '120.0.0.1',//黑名单储存 redis主机
+        'redis_password' => '123456',// redis密码
         'redis_port' => 6379,// redis端口
         'storage_server'=> XXX::class// 储存服务器类型
     ]
