@@ -5,8 +5,7 @@
 composer require yangchao/php-jwt
 ```
 
-## 使用说明
-### 配置
+## 配置
 ```php
 $config = [
     'iss' => 'yangchao/jwt', // 令牌签发者
@@ -37,7 +36,7 @@ $config = [
 * is_single_device 为 false 时，不启用单设备登录，device_verify 可以不设置。
 * signer 配置加密类型，为HS256 时，secret_key 必填，为RS256 时，public_key、private_key 必填。
 * black_list 黑名单需要储存服务，这里给出了两个方案，一个使用redis储存需要配置你的redis_host、redis_password、redis_port；另一种为自定义储存类。 自定义储存类需要实现 \yangchao\jwt\StorageInterface 接口，具体实现参考 \yangchao\jwt\Storage\RedisStorage 类。
-### 使用说明
+## 使用说明
 ```php
 $jwt = new \yangchao\jwt\JWTAuth($config);
 //创建token
@@ -51,7 +50,7 @@ $expiresAt = $jwt->getExpireTime();
 //获取刷新token过期时间
 $refreshExpiresAt = $jwt->getRefreshTtlTime();
 ```
-### 异常说明
+## 异常说明
 * \yangchao\jwt\Exception\JWTException 所有抛出异常
 * \yangchao\jwt\Exception\JWTExpiredException token过期异常
 * \yangchao\jwt\Exception\JWTServerException 服务器异常(内部处理错误)
