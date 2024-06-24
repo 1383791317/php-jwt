@@ -97,9 +97,8 @@ class JWT
         $isRefreshToken = !$this->config->getRefreshDisable();
         $claims = $this->verify($token, $isRefreshToken);
         //加入黑名单
-        $expireTime = $this->payload->getExpireTime() - time();
-        $this->addBlacklistServer($this->payload->getJti(), $expireTime);
-        $this->addBlacklistServer($this->payload->getFromJti(), $expireTime);
+        $this->addBlacklistServer($this->payload->getJti(), $token, $this->config->getExpiresAt());
+        $this->addBlacklistServer($this->payload->getFromJti(), $token, $this->config->getRefreshTtl());
         //生成新的Token
         return $this->make($claims);
     }
@@ -107,7 +106,7 @@ class JWT
     public function addBlacklist($token)
     {
         $this->verify($token);
-        return $this->addBlacklistServer($this->payload->getJti(), $this->payload->getExpireTime() - time());
+        return $this->addBlacklistServer($this->payload->getJti(), $token, $this->payload->getExpireTime() - time());
     }
 
     public function removeBlacklist($token)
@@ -121,9 +120,9 @@ class JWT
         return boolval($this->getBlackList($jti));
     }
 
-    private function addBlacklistServer($jti, $expireTime)
+    private function addBlacklistServer($jti, $token, $expireTime)
     {
-        return BackList::instance($this->config)->add($jti, $expireTime);
+        return BackList::instance($this->config)->add($jti, $token, $expireTime);
     }
 
     private function removeBlacklistServer($jti)
