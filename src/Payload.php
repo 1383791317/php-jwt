@@ -87,8 +87,8 @@ class Payload
         $this->aud = $this->config->getIis();
         $this->iat = time();
         $this->nbf = $this->config->getNbf();
+        $this->from_jti = $refresh ? $this->jti : null;
         $this->jti = $this->createJti();
-        $this->form_jti = $refresh ? $this->jti : null;
         $this->claims = $data;
 
         $this->setDefaultClaims();

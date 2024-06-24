@@ -96,9 +96,10 @@ class JWT
     {
         $isRefreshToken = !$this->config->getRefreshDisable();
         $claims = $this->verify($token, $isRefreshToken);
+        $expireTime = $this->payload->getExpireTime() - time();
         //加入黑名单
-        $this->addBlacklistServer($this->payload->getJti(), $token, $this->config->getExpiresAt());
-        $this->addBlacklistServer($this->payload->getFromJti(), $token, $this->config->getRefreshTtl());
+        $this->addBlacklistServer($this->payload->getJti(), $token, $expireTime);
+        $this->addBlacklistServer($this->payload->getFromJti(), $token, $expireTime);
         //生成新的Token
         return $this->make($claims);
     }
