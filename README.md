@@ -28,6 +28,15 @@ $config = [
         'redis_password' => '123456',// redis密码
         'redis_port' => 6379,// redis端口
         'storage_server'=> XXX::class// 储存服务器类型
+    ],
+    'admin' => [ //多应用管理配置 同以上配置，如果不配置，则使用默认配置
+        'iss' => 'jwt-admin', // 令牌签发者
+        'secret_key' => '', //HS256 密钥
+        'refresh_secret_key' => '',//HS256 刷新密钥
+        'public_key' => '', //RS256 RSA公钥
+        'private_key' => '',//RS256 RSA私钥
+        'refresh_public_key' => '',//RS256 刷新RSA公钥
+        'refresh_private_key' => '',//RS256 刷新RSA私钥
     ]
 ];
 ```
@@ -41,14 +50,20 @@ $config = [
 $jwt = new \yangchao\jwt\JWTAuth($config);
 //创建token
 $token = $jwt->createToken(['a'=>'b']);
+//多应用创建token
+$token = $jwt->store('admin')->createToken(['a'=>'b']);
 //验证token
 $claims = $jwt->verifyToken($token)
+$claims = $jwt->store('admin')->verifyToken($token)
 //刷新Token 当refresh_disable为false时（不禁用刷新），此处token传值为刷新token
 $claims = $jwt->refreshToken($token);
+$claims = $jwt->store('admin')->refreshToken($token);
 //获取token过期时间
 $expiresAt = $jwt->getExpireTime();
+$expiresAt = $jwt->store('admin')->getExpireTime();
 //获取刷新token过期时间
 $refreshExpiresAt = $jwt->getRefreshTtlTime();
+$refreshExpiresAt = $jwt->store('admin')->getRefreshTtlTime();
 ```
 ## 异常说明
 * \yangchao\jwt\Exception\JWTException 所有抛出异常
