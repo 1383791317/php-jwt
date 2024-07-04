@@ -48,6 +48,15 @@ class JWTAuth
         return $res;
     }
 
+    public function addBlacklist(string $token)
+    {
+        return $this->jwt->addBlacklist($token);
+    }
+    public function removeBlacklist(string $token)
+    {
+        return $this->jwt->removeBlacklist($token);
+    }
+
     public function jwt()
     {
         return $this->jwt();
